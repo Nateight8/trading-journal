@@ -25,7 +25,11 @@ const formSchema = z.object({
   trade: z.string().min(2).max(50),
 });
 
-function FormTsx() {
+interface Props {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function FormTsx({ setOpen }: Props) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -85,7 +89,11 @@ function FormTsx() {
         {step === 2 && (
           <>
             <div className="">
-              {trade === "closed" ? <ClosedTrade /> : <NewTrade />}
+              {trade === "closed" ? (
+                <ClosedTrade />
+              ) : (
+                <NewTrade setOpen={setOpen} />
+              )}
             </div>
           </>
         )}

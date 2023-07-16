@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../ui/button";
 
 import {
@@ -13,8 +13,13 @@ import {
 import FormTsx from "./FormTsx";
 
 function Journal() {
+  const [open, setOpen] = useState<boolean>(false);
+  const handleOpenChange = () => {
+    setOpen(!open);
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button variant="outline">Log Trade</Button>
       </DialogTrigger>
@@ -27,7 +32,7 @@ function Journal() {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <FormTsx />
+          <FormTsx setOpen={setOpen} />
         </div>
       </DialogContent>
     </Dialog>

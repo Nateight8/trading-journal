@@ -43,7 +43,11 @@ const formSchema = z.object({
   entryType: z.string().nonempty("Please select an entry type."),
 });
 
-export function NewTrade() {
+interface Props {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export function NewTrade({ setOpen }: Props) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -62,7 +66,6 @@ export function NewTrade() {
   // 2. Define a submit handler.
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     const {
       currencyPair,
       entryType,
@@ -79,6 +82,8 @@ export function NewTrade() {
       takeProfit,
       tradePosition,
     });
+
+    setOpen(false);
   }
 
   // steps
@@ -239,7 +244,7 @@ export function NewTrade() {
           )}
           <div className="my-3 space-y-1">
             {step < 3 ? (
-              <Button onClick={next} className="w-full">
+              <Button type="button" onClick={next} className="w-full">
                 Next
               </Button>
             ) : (
@@ -253,6 +258,7 @@ export function NewTrade() {
               onClick={prev}
               variant="ghost"
               className="w-full"
+              type="button"
             >
               Back
             </Button>
