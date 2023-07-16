@@ -22,8 +22,8 @@ function Journal() {
         <DialogHeader>
           <DialogTitle>Forex Trading Journal</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you&lsquo;re
-            done.
+            Keep track of your journey Lorem ipsum dolor sit amet. Lorem ipsum
+            dolor sit amet.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">

@@ -4,9 +4,9 @@ import TableTsx from "../journal-table/TableTsx";
 
 function AuthUser() {
   return (
-    <div className=" p-4">
+    <div className=" flex min-h-screen w-full items-center justify-center p-4 ">
       <Journal />
-      <TableTsx />
+      {/* <TableTsx /> */}
     </div>
   );
 }

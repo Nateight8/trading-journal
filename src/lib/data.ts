@@ -13,7 +13,7 @@ export const currencyPairs = [
   { id: "ej", name: "EUR/JPY" },
   { id: "gu", name: "GBP/USD" },
   { id: "au", name: "AUD/USD" },
-  { id: "uc", name: "USD/CAD" },
+  { id: "ucad", name: "USD/CAD" },
   { id: "nu", name: "NZD/USD" },
   { id: "aj", name: "AUD/JPY" },
   { id: "eu", name: "EUR/USD" },

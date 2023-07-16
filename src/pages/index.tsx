@@ -18,12 +18,14 @@ export default function Home() {
         <meta name="description" content="Your favourite trading journal" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${mont.className}`}>
+      <main
+        className={`${mont.className} flex min-h-screen w-full flex-col items-center justify-center space-y-4`}
+      >
         {status === "authenticated" ? (
           <AuthUser />
         ) : (
           <>
-            <p>You need to be signed in</p>
+            <p>Start by signing in</p>
             <Button onClick={async () => signIn()}>Sign in</Button>
           </>
         )}
