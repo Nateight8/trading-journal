@@ -6,8 +6,14 @@ import {
 } from "~/server/api/trpc";
 
 export const journalRouter = createTRPCRouter({
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.example.findMany();
+  getAllJournals: protectedProcedure.query(async ({ ctx }) => {
+    const user = ctx.session.user;
+
+    return await ctx.prisma.tradeLog.findMany({
+      where: {
+        userId: user.id,
+      },
+    });
   }),
 
   createJournal: protectedProcedure

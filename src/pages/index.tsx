@@ -21,7 +21,7 @@ export default function Home() {
       <main
         className={`${mont.className} flex min-h-screen w-full flex-col items-center justify-center space-y-4`}
       >
-        {status === "authenticated" ? (
+        {status === "unauthenticated" ? (
           <AuthUser />
         ) : (
           <>
