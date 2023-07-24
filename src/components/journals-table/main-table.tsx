@@ -33,16 +33,16 @@ import { columns } from "./columns";
 import { GetResult } from "@prisma/client/runtime/library";
 
 export interface Data {
-  status:
-    | "Pending"
-    | "Open"
-    | "Closed"
-    | "Triggered"
-    | "Breakeven"
-    | "Partially "
-    | "Filled"
-    | "Lost";
-  id: string;
+  // status:
+  //   | "Pending"
+  //   | "Open"
+  //   | "Closed"
+  //   | "Triggered"
+  //   | "Breakeven"
+  //   | "Partially "
+  //   | "Filled"
+  //   | "Lost";
+  // id: string;
   userId: string;
   currencyPair: string;
   entryType: string | null;
