@@ -53,7 +53,7 @@ export interface Data {
 }
 
 interface Props {
-  data: any;
+  data: Data[];
 }
 
 export function DataTable({ data }: Props) {

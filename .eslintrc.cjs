@@ -43,6 +43,8 @@ const config = {
         allowSingleExtends: true,
       },
     ],
+
+    "@typescript-eslint/no-unsafe-assignment": "off",
   },
 };
 
