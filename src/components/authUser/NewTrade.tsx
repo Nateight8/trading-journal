@@ -62,10 +62,10 @@ export function NewTrade({ setOpen }: Props) {
   });
 
   const createJournalMutation = api.journal.createJournal.useMutation();
-
+  const getJournal = api.journal.getAllJournals.useQuery();
   // 2. Define a submit handler.
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     const {
       currencyPair,
       entryType,
@@ -82,8 +82,8 @@ export function NewTrade({ setOpen }: Props) {
       takeProfit,
       tradePosition,
     });
-
     setOpen(false);
+    await getJournal.refetch();
   }
 
   // steps

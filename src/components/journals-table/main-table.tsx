@@ -30,79 +30,9 @@ import {
   TableRow,
 } from "../ui/table";
 import { columns } from "./columns";
+import { GetResult } from "@prisma/client/runtime/library";
 
-// import {
-//   DropdownMenu,
-//   DropdownMenuCheckboxItem,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuLabel,
-//   DropdownMenuSeparator,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu";
-// import { Input } from "@/components/ui/input";
-
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "Breakeven",
-    pair: "EUR/USD",
-    entryType: "Trend",
-    tradePosition: "Buy",
-    entryPrice: 0.1445,
-    stopLoss: 0.2254,
-    takeProfit: 0.3575,
-  },
-  {
-    id: "m5gr4ai9",
-    amount: 316,
-    status: "Lost",
-    pair: "EUR/USD",
-    entryType: "Trend",
-    tradePosition: "Buy",
-    entryPrice: 0.1445,
-    stopLoss: 0.2254,
-    takeProfit: 0.3575,
-  },
-  {
-    id: "m5gr4ai9",
-    amount: 316,
-    status: "Filled",
-    pair: "EUR/USD",
-    entryType: "Trend",
-    tradePosition: "Sell",
-    entryPrice: 0.1445,
-    stopLoss: 0.2254,
-    takeProfit: 0.3575,
-  },
-  {
-    id: "qsadaef",
-    amount: 316,
-    status: "Triggered",
-    pair: "EUR/USD",
-    entryType: "Trend",
-    tradePosition: "Buy",
-    entryPrice: 0.1745,
-    stopLoss: 0.2254,
-    takeProfit: 0.5575,
-  },
-  {
-    id: "m5gds4ai9",
-    amount: 316,
-    status: "Pending",
-    pair: "EUR/USD",
-    entryType: "Trend",
-    tradePosition: "Sell",
-    entryPrice: 0.1445,
-    stopLoss: 0.2254,
-    takeProfit: 0.3575,
-  },
-];
-
-export type Payment = {
-  id: string;
-  amount: number;
+export interface Data {
   status:
     | "Pending"
     | "Open"
@@ -112,15 +42,21 @@ export type Payment = {
     | "Partially "
     | "Filled"
     | "Lost";
-  pair: string;
-  entryType: string;
+  id: string;
+  userId: string;
+  currencyPair: string;
+  entryType: string | null;
   tradePosition: string;
   entryPrice: number;
   stopLoss: number;
   takeProfit: number;
-};
+}
 
-export function DataTable() {
+interface Props {
+  data: any;
+}
+
+export function DataTable({ data }: Props) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -150,7 +86,7 @@ export function DataTable() {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="flex w-full items-center py-4">
         <Input
           placeholder="Filter status..."
           value={(table.getColumn("status")?.getFilterValue() as string) ?? ""}
@@ -186,28 +122,29 @@ export function DataTable() {
           </DropdownMenuContent>
         </DropdownMenu> */}
       </div>
-      <div className="rounded-md border">
+      <div className="w-full rounded-md border">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
+            {data &&
+              table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
+                    );
+                  })}
+                </TableRow>
+              ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {data && table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -238,8 +175,8 @@ export function DataTable() {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          {data && table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {data && table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
         <div className="space-x-2">
           <Button
@@ -254,7 +191,7 @@ export function DataTable() {
             variant="outline"
             size="sm"
             onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
+            disabled={data && !table.getCanNextPage()}
           >
             Next
           </Button>

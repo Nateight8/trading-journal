@@ -18,10 +18,8 @@ export default function Home() {
         <meta name="description" content="Your favourite trading journal" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main
-        className={`${mont.className} flex min-h-screen w-full flex-col items-center justify-center space-y-4`}
-      >
-        {status === "unauthenticated" ? (
+      <main className={`${mont.className} `}>
+        {status === "authenticated" ? (
           <AuthUser />
         ) : (
           <>

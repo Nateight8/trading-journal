@@ -2,13 +2,11 @@ import React from "react";
 import Journal from "./Journal";
 
 import { api } from "~/utils/api";
-import { TabsTsx } from "./TabsTsx";
-import { columns } from "../journals-table/columns";
+
 import { DataTable } from "../journals-table/main-table";
 
 function AuthUser() {
-  const getJournals = api.journal.getAllJournals.useQuery();
-  const { data } = getJournals;
+  const { data } = api.journal.getAllJournals.useQuery();
 
   return (
     <div className="min-h-screen w-full p-4 ">
@@ -17,7 +15,7 @@ function AuthUser() {
         <Journal />
       </div>
       <div className=" my-4 w-full sm:border sm:p-4">
-        <DataTable />
+        {data && <DataTable data={data} />}
       </div>
     </div>
   );

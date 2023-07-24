@@ -27,7 +27,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { Payment } from "./main-table";
+import { Data } from "./main-table";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,7 +37,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Data>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -65,11 +65,13 @@ export const columns: ColumnDef<Payment>[] = [
     ),
   },
   {
-    accessorKey: "pair",
+    accessorKey: "currencyPair",
     header: () => (
       <h1 className="whitespace-nowrap capitalize">Trading Pair</h1>
     ),
-    cell: ({ row }) => <div className="capitalize">{row.getValue("pair")}</div>,
+    cell: ({ row }) => (
+      <div className="uppercase">{row.getValue("currencyPair")}</div>
+    ),
   },
   {
     accessorKey: "entryType",
@@ -110,37 +112,37 @@ export const columns: ColumnDef<Payment>[] = [
     ),
   },
 
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const payment = row.original;
+  // {
+  //   id: "actions",
+  //   enableHiding: false,
+  //   cell: ({ row }) => {
+  //     const payment = row.original;
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <DotsHorizontalIcon className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Update Status</DropdownMenuLabel>
+  //     return (
+  //       <DropdownMenu>
+  //         <DropdownMenuTrigger asChild>
+  //           <Button variant="ghost" className="h-8 w-8 p-0">
+  //             <span className="sr-only">Open menu</span>
+  //             <DotsHorizontalIcon className="h-4 w-4" />
+  //           </Button>
+  //         </DropdownMenuTrigger>
+  //         <DropdownMenuContent align="end">
+  //           <DropdownMenuLabel>Update Status</DropdownMenuLabel>
 
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Open</DropdownMenuItem>
-            <DropdownMenuItem>Closed</DropdownMenuItem>
-            <DropdownMenuItem>Pending</DropdownMenuItem>
-            <DropdownMenuItem>Untriggered</DropdownMenuItem>
-            <DropdownMenuItem>Triggerd</DropdownMenuItem>
-            <DropdownMenuItem>Partials</DropdownMenuItem>
-            <DropdownMenuItem>Filled</DropdownMenuItem>
-            <DropdownMenuItem>Lost</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
-  },
+  //           <DropdownMenuSeparator />
+  //           <DropdownMenuItem>Open</DropdownMenuItem>
+  //           <DropdownMenuItem>Closed</DropdownMenuItem>
+  //           <DropdownMenuItem>Pending</DropdownMenuItem>
+  //           <DropdownMenuItem>Untriggered</DropdownMenuItem>
+  //           <DropdownMenuItem>Triggerd</DropdownMenuItem>
+  //           <DropdownMenuItem>Partials</DropdownMenuItem>
+  //           <DropdownMenuItem>Filled</DropdownMenuItem>
+  //           <DropdownMenuItem>Lost</DropdownMenuItem>
+  //         </DropdownMenuContent>
+  //       </DropdownMenu>
+  //     );
+  //   },
+  // },
 ];
 
 // {

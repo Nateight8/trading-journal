@@ -9,11 +9,13 @@ export const journalRouter = createTRPCRouter({
   getAllJournals: protectedProcedure.query(async ({ ctx }) => {
     const user = ctx.session.user;
 
-    return await ctx.prisma.tradeLog.findMany({
+    const allJournals = await ctx.prisma.tradeLog.findMany({
       where: {
         userId: user.id,
       },
     });
+
+    return allJournals;
   }),
 
   createJournal: protectedProcedure
